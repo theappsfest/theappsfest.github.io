@@ -18,50 +18,44 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: #1f1f1f;
       padding: 15px 20px;
       font-size: 20px;
       font-weight: bold;
     }
 
-    body.dark header { background: #1f1f1f; }
-    body.light header { background: white; }
+    .hamburger {
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    /* RIGHT DRAWER */
+    #menu {
+      position: fixed;
+      top: 0;
+      right: -280px;
+      width: 260px;
+      height: 100%;
+      background: #1e1e1e;
+      padding: 20px;
+      transition: right 0.3s ease;
+      z-index: 999;
+    }
+
+    #menu.open {
+      right: 0;
+    }
+
+    .menuItem {
+      padding: 12px 0;
+      border-bottom: 1px solid #444;
+      cursor: pointer;
+    }
 
     .subtitle {
       text-align: center;
       color: gray;
-      margin-top: 10px;
-    }
-
-    .hamburger {
-      cursor: pointer;
-      font-size: 22px;
-    }
-
-    .overlay {
-      position: fixed;
-      top: 0;
-      right: -260px;
-      width: 260px;
-      height: 100%;
-      transition: right 0.3s ease;
-      padding: 20px;
-      z-index: 1000;
-    }
-
-    body.dark .overlay { background: #1e1e1e; }
-    body.light .overlay { background: white; }
-
-    .overlay.open { right: 0; }
-
-    .menuTitle {
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .menuItem {
-      padding: 10px 0;
-      cursor: pointer;
-      border-bottom: 1px solid #444;
+      margin: 10px;
     }
 
     .container {
@@ -73,6 +67,7 @@
     }
 
     .card {
+      background: #1e1e1e;
       border-radius: 16px;
       padding: 20px;
       margin: 15px;
@@ -80,25 +75,13 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
 
-    body.dark .card { background: #1e1e1e; }
-    body.light .card { background: white; }
+    body.light .card {
+      background: white;
+    }
 
     .icon {
       width: 110px;
       border-radius: 22px;
-    }
-
-    .title {
-      font-size: 18px;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .desc {
-      font-size: 14px;
-      margin: 10px 0;
-      color: gray;
-      line-height: 1.4;
     }
 
     .badge {
@@ -125,8 +108,8 @@
 </div>
 
 <!-- MENU -->
-<div class="overlay" id="menu">
-  <div class="menuTitle">Theme</div>
+<div id="menu">
+  <h3>Theme</h3>
   <div class="menuItem" onclick="setTheme('light')">☀️ Light</div>
   <div class="menuItem" onclick="setTheme('dark')">🌙 Dark</div>
   <div class="menuItem" onclick="setTheme('system')">⚙️ System</div>
@@ -136,11 +119,11 @@
 
   <div class="card">
     <img src="splash.png" class="icon"><br>
-    <div class="title">Status Saver for WhatsApp</div>
-    <div class="desc">
+    <h3>Status Saver for WhatsApp</h3>
+    <p>
       Easily save WhatsApp status photos and videos.
       Fast downloading, simple interface, and lightweight performance.
-    </div>
+    </p>
     <a href="https://play.google.com/store/apps/details?id=com.theappsfest.storysaverforwhatsapp">
       <img class="badge"
       src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png">
@@ -149,11 +132,11 @@
 
   <div class="card">
     <img src="icon.png" class="icon"><br>
-    <div class="title">Color Wallpaper</div>
-    <div class="desc">
+    <h3>Color Wallpaper</h3>
+    <p>
       Instantly set solid color wallpapers for your phone.
       Minimal design, fast performance, and AMOLED-friendly colors.
-    </div>
+    </p>
     <a href="https://play.google.com/store/apps/details?id=com.theappsfest.colorwallpaper">
       <img class="badge"
       src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png">
