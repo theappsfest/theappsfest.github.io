@@ -8,34 +8,50 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      text-align: center;
       transition: background 0.3s, color 0.3s;
     }
 
-    body.dark {
-      background: #121212;
-      color: white;
-    }
-
-    body.light {
-      background: #f5f5f5;
-      color: black;
-    }
+    body.dark { background: #121212; color: white; }
+    body.light { background: #f5f5f5; color: black; }
 
     header {
-      padding: 20px;
-      font-size: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      font-size: 20px;
       font-weight: bold;
     }
 
     body.dark header { background: #1f1f1f; }
-    body.light header { background: #ffffff; }
+    body.light header { background: white; }
+
+    .hamburger {
+      cursor: pointer;
+      font-size: 22px;
+    }
+
+    .menuPanel {
+      display: none;
+      text-align: center;
+      padding: 15px;
+    }
+
+    body.dark .menuPanel { background: #1e1e1e; }
+    body.light .menuPanel { background: #eee; }
+
+    .themeBtn {
+      font-size: 22px;
+      margin: 10px;
+      cursor: pointer;
+    }
 
     .container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       padding: 20px;
+      text-align: center;
     }
 
     .card {
@@ -44,13 +60,12 @@
       margin: 15px;
       width: 280px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: background 0.3s;
     }
 
     body.dark .card { background: #1e1e1e; }
     body.light .card { background: white; }
 
-    .card img.icon {
+    .icon {
       width: 110px;
       border-radius: 22px;
     }
@@ -64,6 +79,7 @@
     .desc {
       font-size: 14px;
       margin: 10px 0;
+      color: gray;
     }
 
     .badge {
@@ -72,13 +88,8 @@
     }
 
     footer {
+      text-align: center;
       margin: 30px;
-      font-size: 14px;
-    }
-
-    select {
-      margin-top: 10px;
-      padding: 6px;
     }
 
     @media (max-width: 600px) {
@@ -90,47 +101,33 @@
 <body>
 
 <header>
-  TheAppsFest<br>
-
-  <select id="themeSelect">
-    <option value="system">System</option>
-    <option value="dark">Dark</option>
-    <option value="light">Light</option>
-  </select>
+  <div>TheAppsFest</div>
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
 </header>
 
-<p>Simple and useful Android apps</p>
+<div class="menuPanel" id="menuPanel">
+  <div>Theme</div>
+  <span class="themeBtn" onclick="setTheme('light')">☀️</span>
+  <span class="themeBtn" onclick="setTheme('dark')">🌙</span>
+  <span class="themeBtn" onclick="setTheme('system')">⚙️</span>
+</div>
 
 <div class="container">
 
-  <!-- Status Saver -->
   <div class="card">
     <img src="splash.png" class="icon"><br>
-
     <div class="title">Status Saver for WhatsApp</div>
-
-    <div class="desc">
-      Save WhatsApp status photos and videos easily.
-      Fast and lightweight downloader.
-    </div>
-
+    <div class="desc">Save WhatsApp status photos and videos easily.</div>
     <a href="https://play.google.com/store/apps/details?id=com.theappsfest.storysaverforwhatsapp">
       <img class="badge"
       src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png">
     </a>
   </div>
 
-  <!-- Color Wallpaper -->
   <div class="card">
     <img src="icon.png" class="icon"><br>
-
     <div class="title">Color Wallpaper</div>
-
-    <div class="desc">
-      Set solid color wallpapers instantly.
-      Minimal and AMOLED-friendly wallpaper app.
-    </div>
-
+    <div class="desc">Set solid color wallpapers instantly.</div>
     <a href="https://play.google.com/store/apps/details?id=com.theappsfest.colorwallpaper">
       <img class="badge"
       src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png">
@@ -146,9 +143,12 @@
 </footer>
 
 <script>
-const select = document.getElementById("themeSelect");
+function toggleMenu() {
+  const panel = document.getElementById("menuPanel");
+  panel.style.display = panel.style.display === "block" ? "none" : "block";
+}
 
-function applyTheme(theme) {
+function setTheme(theme) {
   document.body.classList.remove("dark", "light");
 
   if (theme === "system") {
@@ -161,13 +161,8 @@ function applyTheme(theme) {
   localStorage.setItem("theme", theme);
 }
 
-select.addEventListener("change", () => {
-  applyTheme(select.value);
-});
-
 const savedTheme = localStorage.getItem("theme") || "system";
-select.value = savedTheme;
-applyTheme(savedTheme);
+setTheme(savedTheme);
 </script>
 
 </body>
